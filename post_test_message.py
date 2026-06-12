@@ -48,11 +48,15 @@ def post_to_facebook(message, link, page_id_override):
     # Use /me/feed for personal account, /{page_id}/feed for page
     target = page_id
     url = f"{base_url}/{target}/feed"
-    data = {"message": message, 
-            "link": "https://open.spotify.com/episode/29RsUUthV7Rgs6hOWfrOBL", # テスト用URL
-            "access_token": token}
+    
+    data = {
+        "message": message, 
+        "access_token": token
+    }
+    
     if link:
         data["link"] = link
+        
     response = requests.post(url, data=data, timeout=30)
     ensure_success("Facebook", response)
     return response
